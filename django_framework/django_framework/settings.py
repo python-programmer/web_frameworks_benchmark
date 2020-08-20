@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '6#yi@&_m19v-a_moh0hkt+-et=)w4ay&%zen=0udvxf-fgs+#b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,13 +79,24 @@ WSGI_APPLICATION = 'django_framework.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'benchmark_db',
-        'USER': 'benchmark',
-        'PASSWORD': 'P455w0rd',
-        'HOST': '127.0.0.1',
+        'NAME': 'order_db',
+        'USER': 'admin',
+        'PASSWORD': 'P4S5W0rD',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'benchmark_db',
+#         'USER': 'benchmark',
+#         'PASSWORD': 'P455w0rd',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
