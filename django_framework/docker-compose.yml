@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: postgres:9.6.8
+    volumes:
+      - ./postgres-data/postgres:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=P4S5W0rD
+      - POSTGRES_DB=order_db
+
+  server:
+    restart: always
+    build: .
+    # first run `docker-compose up`
+    # then in another terminal run `docker exec -t -i 66175bfd6ae6(docker image hash) bash`
+    # and finally run `docker-compose exec server python manage.py migrate`
+    # `docker-compose exec server python manage.py populate_models order/data/data.json`
+    command: gunicorn django_framework.asgi:application --log-level error --bind 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker
+    volumes:
+      - .:/server
+    ports:
+      - 80:8000
+    depends_on:
+      - db
